@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import FormSample from "./Container/FormSample";
+import { ToastContainer, toast } from "react-toastify";
+import { Tab } from "semantic-ui-react";
+
+const panes = [{ menuItem: "Sample Form", render: () => <FormSample /> }];
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.tsx</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <>
+        <div className="App">
+          <Tab panes={panes} />
+        </div>
+        <ToastContainer
+          position={toast.POSITION.BOTTOM_CENTER}
+          autoClose={3000}
+          newestOnTop={false}
+          closeOnClick
+          pauseOnHover
+        />
+      </>
     );
   }
 }
