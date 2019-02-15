@@ -17,6 +17,7 @@ class FormSample extends Component<any, any> {
     super(props);
 
     this.state = {
+      address: "",
       firstName: "",
       lastName: "",
       haveSocialMedia: false,
@@ -91,18 +92,16 @@ class FormSample extends Component<any, any> {
 
   handleChangeFile(e: any) {
     const file = e.target.files[0];
-    let state = {};
-    if (file) {
-      state = {
-        fileName: file.name,
-        file
-      };
-    } else {
-      state = {
-        fileName: null,
-        file: null
-      };
-    }
+    let state = file
+      ? {
+          fileName: file.name,
+          file
+        }
+      : {
+          fileName: null,
+          file: null
+        };
+
     this.setState(state);
     e.target.value = null;
   }

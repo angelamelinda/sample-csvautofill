@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import "./App.css";
 import FormSample from "./Container/FormSample";
+import Application from "./Container/Application";
 import { ToastContainer, toast } from "react-toastify";
 import { Tab } from "semantic-ui-react";
 
-const panes = [{ menuItem: "Sample Form", render: () => <FormSample /> }];
+const panes = [
+  { menuItem: "Sample Form", render: () => <FormSample /> },
+  { menuItem: "Nested Component Form ", render: () => <Application /> }
+];
 
 class App extends Component {
   render() {
