@@ -58,8 +58,8 @@ class Application extends Component<any, any> {
           let el = document.getElementsByName("csv-" + key) as any;
           let type = el[0].getAttribute("type");
           let disabled = el[0].disabled;
-          if (type === "checkbox" || type === "radio") {
-            if (val.value.toString().toLowerCase() === "yes") {
+          if (type === "checkbox") {
+            if (val.value !== "") {
               value = true;
             } else {
               value = false;
@@ -168,11 +168,11 @@ class Application extends Component<any, any> {
                     <label>Upload CSV</label>
                   </Grid.Column>
                   <Grid.Column width={10}>
-                    <div className="choose-file-wrapper">
-                      <label className="choose-file">
+                    <div className='choose-file-wrapper'>
+                      <label className='choose-file'>
                         <Input
-                          className="input-file"
-                          type="file"
+                          className='input-file'
+                          type='file'
                           onChange={this.handleChangeFile}
                         />
                         <Input
@@ -184,7 +184,7 @@ class Application extends Component<any, any> {
                           value={this.state.fileName ? this.state.fileName : ""}
                         />
                         <Button
-                          className="no-event"
+                          className='no-event'
                           onClick={this.handleUpload}
                         >
                           Choose File
@@ -194,9 +194,9 @@ class Application extends Component<any, any> {
                     </div>
                   </Grid.Column>
                 </Grid.Row>
-                <Grid.Row className="pt-0 pb-0">
+                <Grid.Row className='pt-0 pb-0'>
                   <Grid.Column width={4} />
-                  <Grid.Column width={4} className="color-danger">
+                  <Grid.Column width={4} className='color-danger'>
                     {this.state.error}
                   </Grid.Column>
                 </Grid.Row>

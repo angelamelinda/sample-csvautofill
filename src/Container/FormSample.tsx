@@ -120,8 +120,8 @@ class FormSample extends Component<any, any> {
             let el = document.getElementsByName("csv-" + key) as any;
             let type = el[0].getAttribute("type");
             let disabled = el[0].disabled;
-            if (type === "checkbox" || type === "radio") {
-              if (val.value.toString().toLowerCase() === "yes") {
+            if (type === "checkbox") {
+              if (val.value !== "") {
                 value = true;
               } else {
                 value = false;
@@ -174,7 +174,7 @@ class FormSample extends Component<any, any> {
     const likeToTraveling = { checked: this.state.likeToTraveling };
     let renderForm = (
       <TabPane>
-        <Grid verticalAlign="top">
+        <Grid verticalAlign='top'>
           <Grid.Row>
             <Grid.Column>
               <Grid>
@@ -205,11 +205,11 @@ class FormSample extends Component<any, any> {
                     <label>Upload CSV</label>
                   </Grid.Column>
                   <Grid.Column width={10}>
-                    <div className="choose-file-wrapper">
-                      <label className="choose-file">
+                    <div className='choose-file-wrapper'>
+                      <label className='choose-file'>
                         <Input
-                          className="input-file"
-                          type="file"
+                          className='input-file'
+                          type='file'
                           onChange={this.handleChangeFile}
                         />
                         <Input
@@ -221,7 +221,7 @@ class FormSample extends Component<any, any> {
                           value={this.state.fileName ? this.state.fileName : ""}
                         />
                         <Button
-                          className="no-event"
+                          className='no-event'
                           onClick={this.handleUpload}
                         >
                           Choose File
@@ -231,9 +231,9 @@ class FormSample extends Component<any, any> {
                     </div>
                   </Grid.Column>
                 </Grid.Row>
-                <Grid.Row className="pt-0 pb-0">
+                <Grid.Row className='pt-0 pb-0'>
                   <Grid.Column width={4} />
-                  <Grid.Column width={4} className="color-danger">
+                  <Grid.Column width={4} className='color-danger'>
                     {this.state.error}
                   </Grid.Column>
                 </Grid.Row>
@@ -246,21 +246,17 @@ class FormSample extends Component<any, any> {
               <Grid>
                 <Grid.Row verticalAlign={"middle"}>
                   <Grid.Column width={4}>
-                    <label htmlFor="csv-title" hidden>
-                      Mr./Mrs./Ms.
-                    </label>
                     <label>Title</label>
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <select
                       value={this.state.title}
-                      name="csv-title"
-                      id="title"
+                      id='title'
                       onChange={e => this.updateInputValue(e, "title")}
                     >
-                      <option value="Mr.">Mr.</option>
-                      <option value="Mrs.">Mrs.</option>
-                      <option value="Ms.">Ms.</option>
+                      <option value='Mr.'>Mr.</option>
+                      <option value='Mrs.'>Mrs.</option>
+                      <option value='Ms.'>Ms.</option>
                     </select>
                   </Grid.Column>
                 </Grid.Row>
@@ -273,16 +269,13 @@ class FormSample extends Component<any, any> {
               <Grid>
                 <Grid.Row verticalAlign={"middle"}>
                   <Grid.Column width={4}>
-                    <label htmlFor="csv-firstName" hidden>
-                      Your "first" name.
-                    </label>
-                    <label>First Name</label>
+                    <label htmlFor='csv-firstName'>First Name</label>
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <Input
                       fluid
-                      name="csv-firstName"
-                      placeholder="John"
+                      name='csv-firstName'
+                      placeholder='John'
                       value={this.state.firstName}
                       onChange={e => this.updateInputValue(e, "firstName")}
                     />
@@ -297,16 +290,13 @@ class FormSample extends Component<any, any> {
               <Grid>
                 <Grid.Row verticalAlign={"middle"}>
                   <Grid.Column width={4}>
-                    <label htmlFor="csv-lastName" hidden>
-                      Your "last" name.
-                    </label>
-                    <label>Last Name</label>
+                    <label htmlFor='csv-lastName'>Last Name</label>
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <Input
                       fluid
-                      name="csv-lastName"
-                      placeholder="Doe"
+                      name='csv-lastName'
+                      placeholder='Doe'
                       value={this.state.lastName}
                       onChange={e => this.updateInputValue(e, "lastName")}
                     />
@@ -321,15 +311,11 @@ class FormSample extends Component<any, any> {
               <Grid>
                 <Grid.Row verticalAlign={"middle"}>
                   <Grid.Column width={4}>
-                    <label htmlFor="csv-haveSocialMedia" hidden>
-                      Yes or no
-                    </label>
                     <label>Do you have social media?</label>
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <Radio
-                      label="Yes"
-                      name="csv-haveSocialMedia"
+                      label='Yes'
                       checked={this.state.haveSocialMedia}
                       disabled={true}
                       onChange={e =>
@@ -337,8 +323,7 @@ class FormSample extends Component<any, any> {
                       }
                     />{" "}
                     <Radio
-                      label="No"
-                      name="csv-haveSocialMedia"
+                      label='No'
                       checked={this.state.haveSocialMedia === false}
                       onChange={e =>
                         this.updateInputValue(e, "haveSocialMedia")
@@ -355,35 +340,30 @@ class FormSample extends Component<any, any> {
               <Grid>
                 <Grid.Row verticalAlign={"middle"}>
                   <Grid.Column width={4}>
-                    <label htmlFor="csv-likeToShopping" hidden>
-                      Yes or no
-                    </label>
-                    <label htmlFor="csv-likeToTraveling" hidden>
-                      Yes or no
-                    </label>
-                    <label htmlFor="csv-likeToReading" hidden>
-                      Yes or no
-                    </label>
                     <label>Hobby</label>
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <Checkbox
-                      name="csv-likeToShopping"
-                      label="Shopping"
+                      name='csv-likeToShopping'
+                      label={
+                        <label htmlFor='csv-likeToShopping'>Shopping</label>
+                      }
                       {...likeToShopping}
                       onChange={e => this.updateInputValue(e, "likeToShopping")}
                     />{" "}
                     <Checkbox
-                      name="csv-likeToTraveling"
-                      label="Travelling"
+                      name='csv-likeToTraveling'
+                      label={
+                        <label htmlFor='csv-likeToTraveling'>Travelling</label>
+                      }
                       {...likeToTraveling}
                       onChange={e =>
                         this.updateInputValue(e, "likeToTraveling")
                       }
                     />{" "}
                     <Checkbox
-                      name="csv-likeToReading"
-                      label="Reading"
+                      name='csv-likeToReading'
+                      label={<label htmlFor='csv-likeToReading'>Reading</label>}
                       onChange={e => this.updateInputValue(e, "likeToReading")}
                       {...likeToReading}
                     />
@@ -398,16 +378,15 @@ class FormSample extends Component<any, any> {
               <Grid>
                 <Grid.Row verticalAlign={"middle"}>
                   <Grid.Column width={4}>
-                    <label htmlFor="csv-profilePictureLink" hidden>
-                      Your profile picture link (e.g http:\\xyz.com)
+                    <label htmlFor='csv-profilePictureLink'>
+                      Profile Picture Link
                     </label>
-                    <label>Profile Picture Link</label>
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <Input
                       fluid
-                      name="csv-profilePictureLink"
-                      placeholder="http://xyz.com"
+                      name='csv-profilePictureLink'
+                      placeholder='http://xyz.com'
                       value={this.state.profilePictureLink}
                       onChange={e =>
                         this.updateInputValue(e, "profilePictureLink")
@@ -424,16 +403,13 @@ class FormSample extends Component<any, any> {
               <Grid>
                 <Grid.Row verticalAlign={"top"}>
                   <Grid.Column width={4}>
-                    <label htmlFor="csv-description" hidden>
-                      Describe about yourself
-                    </label>
-                    <label>Description</label>
+                    <label htmlFor='csv-description'>Description</label>
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <Form>
                       <TextArea
-                        name="csv-description"
-                        placeholder="Tell us more"
+                        name='csv-description'
+                        placeholder='Tell us more'
                         value={this.state.description}
                         onChange={e => this.updateInputValue(e, "description")}
                       />
@@ -449,17 +425,14 @@ class FormSample extends Component<any, any> {
               <Grid>
                 <Grid.Row verticalAlign={"top"}>
                   <Grid.Column width={4}>
-                    <label htmlFor="csv-email" hidden>
-                      Your email address
-                    </label>
-                    <label>Email</label>
+                    <label htmlFor='csv-email'>Email</label>
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <Input
                       fluid
-                      name="csv-email"
-                      placeholder="jane.doe@xyz.com"
-                      type="email"
+                      name='csv-email'
+                      placeholder='jane.doe@xyz.com'
+                      type='email'
                       value={this.state.email}
                       onChange={e => this.updateInputValue(e, "email")}
                     />
@@ -474,14 +447,13 @@ class FormSample extends Component<any, any> {
               <Grid>
                 <Grid.Row verticalAlign={"top"}>
                   <Grid.Column width={4}>
-                    <label htmlFor="csv-phoneNumber" hidden />
-                    <label>Phone Number</label>
+                    <label htmlFor='csv-phoneNumber'>Phone Number</label>
                   </Grid.Column>
                   <Grid.Column width={4}>
                     <Input
                       fluid
-                      name="csv-phoneNumber"
-                      placeholder="8123456789"
+                      name='csv-phoneNumber'
+                      placeholder='8123456789'
                       value={this.state.phoneNumber}
                       onChange={e => this.updateInputValue(e, "phoneNumber")}
                     />
