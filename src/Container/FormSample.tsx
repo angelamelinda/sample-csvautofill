@@ -109,63 +109,61 @@ class FormSample extends Component<any, any> {
   handleUpload(e: any) {
     e.preventDefault();
 
-    let result = CsvAutoFill.uploadFile({ file: this.state.file }).then(
-      result => {
-        console.log(result);
-        if (result.statusCode === 1 && Array.isArray(result.data)) {
-          let state = {};
-          let x = result.data.forEach(val => {
-            let key = val.key;
-            let value;
-            let el = document.getElementsByName("csv-" + key) as any;
-            let type = el[0].getAttribute("type");
-            let disabled = el[0].disabled;
-            if (type === "checkbox") {
-              if (val.value !== "") {
-                value = true;
-              } else {
-                value = false;
-              }
-            } else if (type === "number") {
-              if (
-                Number(val.value) !== NaN &&
-                !val.value.match(/[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)/)
-              ) {
-                value = Number(val.value);
-              } else {
-                value = "";
-              }
+    CsvAutoFill.uploadFile({ file: this.state.file }).then(result => {
+      console.log(result);
+      if (result.statusCode === 1 && Array.isArray(result.data)) {
+        let state = {};
+        let x = result.data.forEach(val => {
+          let key = val.key;
+          let value;
+          let el = document.getElementsByName("csv-" + key) as any;
+          let type = el[0].getAttribute("type");
+          let disabled = el[0].disabled;
+          if (type === "checkbox") {
+            if (val.value !== "") {
+              value = true;
             } else {
-              value = val.value;
+              value = false;
             }
-            if (disabled === false) {
-              state = { ...state, [key]: value };
+          } else if (type === "number") {
+            if (
+              Number(val.value) !== NaN &&
+              !val.value.match(/[-+]?[0-9]*\.?[0-9]+([eE][-+]?[0-9]+)/)
+            ) {
+              value = Number(val.value);
+            } else {
+              value = "";
             }
-          });
+          } else {
+            value = val.value;
+          }
+          if (disabled === false) {
+            state = { ...state, [key]: value };
+          }
+        });
 
-          this.setState({ ...state, error: "", fileName: "", file: null });
-          toast.success("CSV Uploaded!");
-        } else if (result.statusCode === 0 && !Array.isArray(result.data)) {
-          this.setState({
-            error: result.data.message,
-            title: "",
-            firstName: "",
-            lastName: "",
-            haveSocialMedia: false,
-            likeToShopping: false,
-            likeToReading: false,
-            likeToTraveling: false,
-            profilePictureLink: "",
-            description: "",
-            email: "",
-            phoneNumber: "",
-            fileName: "",
-            file: null
-          });
-          toast.error("Failed to Upload!");
-        }
+        this.setState({ ...state, error: "", fileName: "", file: null });
+        toast.success("CSV Uploaded!");
+      } else if (result.statusCode === 0 && !Array.isArray(result.data)) {
+        this.setState({
+          error: result.data.message,
+          title: "",
+          firstName: "",
+          lastName: "",
+          haveSocialMedia: false,
+          likeToShopping: false,
+          likeToReading: false,
+          likeToTraveling: false,
+          profilePictureLink: "",
+          description: "",
+          email: "",
+          phoneNumber: "",
+          fileName: "",
+          file: null
+        });
+        toast.error("Failed to Upload!");
       }
-    );
+    });
   }
 
   render() {
